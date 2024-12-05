@@ -19,7 +19,7 @@ replicaCount: 1
 
 image:
   # TODO: Change this to mcr, when ready
-  repository: mcr.microsoft.com/azuremonitor/auth-proxy/prod/aad-auth-proxy/helmchart/aad-auth-proxy
+  repository: mcr.microsoft.com/azuremonitor/auth-proxy/prod/aad-auth-proxy/images/aad-auth-proxy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 0.1.0-main-08-23-2023-5988d874
