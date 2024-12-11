@@ -1,3 +1,8 @@
+# yamllint disable-file
+#
+# ⚠️  For the next person who edits this file, please re-enable yamllint by 
+# removing the first line.
+
 # Default values for aad-auth-proxy.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -5,7 +10,7 @@
 listeningPort: 8081
 audience: https://prometheus.monitor.azure.com/.default
 targetHost: ""
-identityType: ""
+identityType: systemAssigned
 aadClientId: ""
 aadTenantId: ""
 aadClientCertificatePath: ""
@@ -13,16 +18,15 @@ aadTokenRefreshIntervalInPercentage: "10"
 otelServiceName: "aad_auth_proxy"
 otelGrpcEndpoint: ""
 overrideRequestHeaders: "{}"
-addWorkloadIdentityLabel: ""
+extraLabels: {}
 
 replicaCount: 1
 
 image:
-  # TODO: Change this to mcr, when ready
   repository: mcr.microsoft.com/azuremonitor/auth-proxy/prod/aad-auth-proxy/images/aad-auth-proxy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.1.0-main-08-23-2023-5988d874
+  tag: 0.1.0-main-01-10-2024-08b31473
 
 imagePullSecrets: []
 nameOverride: ""
@@ -42,13 +46,13 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext: 
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -70,15 +74,13 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
-
 tolerations: []
 
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
-        - labelSelector:
-          matchExpressions:
+        - matchExpressions:
             - key: kubernetes.io/os
               operator: In
               values:

@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "aad-auth-proxy.selectorLabels" . | nindent 8 }}
+        {{- include "aad-auth-proxy.labels" . | nindent 8 }}
         {{- if eq .Values.addWorkloadIdentityLabel "azure" }}
         azure.workload.identity/use: "true"
         {{- end}}

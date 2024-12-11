@@ -1,3 +1,9 @@
+# yamllint disable-file
+#
+# ⚠️  For the next person who edits this file, please re-enable yamllint by 
+# removing the first line.
+
+
 apiVersion: v2
 name: aad-auth-proxy
 description: A Helm chart for deploying a forward proxy which authenticates requests using Azure AAD.
@@ -15,4 +21,5 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: v1.0.0
+version: 0.0.0
+appVersion: 0.0.0

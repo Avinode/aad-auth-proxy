@@ -36,6 +36,11 @@ Common labels
 {{- define "aad-auth-proxy.labels" -}}
 helm.sh/chart: {{ include "aad-auth-proxy.chart" . }}
 {{ include "aad-auth-proxy.selectorLabels" . }}
+{{- if .Values.extraLabels }}
+{{- range $key, $value := .Values.extraLabels }}
+{{ $key }}: {{ $value | squote }}
+{{- end }}
+{{- end }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
